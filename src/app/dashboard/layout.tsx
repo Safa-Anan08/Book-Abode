@@ -32,13 +32,15 @@ export default function DashboardLayout({
     return null;
   }
 
-  return (
-    <div className="flex min-h-screen bg-[#e0be93]">
+ return (
+  <div className="min-h-screen bg-[#e0be93]">
+    <div className="lg:flex">
       <AdminSidebar />
 
-      <main className="flex-1 p-8">
+      <main className="flex-1 px-4 py-6 lg:p-8">
         {children}
       </main>
     </div>
-  );
+  </div>
+);
 }

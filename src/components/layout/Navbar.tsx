@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import UserDropdown from "./UserDropdown";
 import NotificationBell from "../shared/NotificationBell";
+import { FaHeart, FaUser } from "react-icons/fa";
 export default function Navbar() {
   const pathname = usePathname();
   const { user } = useAuth();
@@ -44,6 +45,8 @@ export default function Navbar() {
     </Link>
 
     <nav className="hidden items-center gap-8 lg:flex">
+     
+       
       {links.map((item) => (
         <Link
           key={item.href}
@@ -136,7 +139,9 @@ export default function Navbar() {
   {open && (
     <div className="border-t border-[#C3955B]/20 bg-[#261311] lg:hidden">
       <div className="space-y-2 px-6 py-5">
-
+<div className="pt-3">
+              <NotificationBell />
+            </div>
         {links.map((item) => (
           <Link
             key={item.href}
@@ -171,10 +176,27 @@ export default function Navbar() {
             >
               My Books
             </Link>
+           <Link
+        href="/wishlist"
+        onClick={() => setOpen(false)}
+        className="flex items-center gap-3 px-3 py-3 text-gray-300 transition hover:bg-[#C3955B]/10 hover:text-[#C3955B]"
+     >
+       <FaHeart className="text-red-500" />
+        <span>My Wishlist</span>
+     </Link>
+     <Link
+          href="/profile"
+          onClick={() => setOpen(false)}
+           className="flex items-center gap-3 px-3 py-3 text-gray-300 transition hover:bg-[#C3955B]/10 hover:text-[#C3955B]"
+     
+        >
+          <FaUser  className="text-purple-900" />
+        <span>My Profile</span>
+        </Link>
+            
 
-            <div className="pt-3">
-              <NotificationBell />
-            </div>
+           
+            
 
             <div className="pt-3">
               <UserDropdown mobile />

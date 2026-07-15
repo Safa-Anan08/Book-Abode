@@ -29,16 +29,23 @@ export default function BookForm({
 }: Props) {
   const router = useRouter();
 
-  const {
-    register,
-    control,
-    handleSubmit,
-    reset,
-    formState: {
-      errors,
-      isSubmitting,
-    },
-  } = useForm<BookFormData>();
+ const {
+  register,
+  handleSubmit,
+  reset,
+  watch,
+  formState: { errors, isSubmitting },
+} = useForm<BookFormData>({
+  defaultValues: {
+    title: "",
+    author: "",
+    category: "",
+    price: 0,
+    rating: 0,
+    shortDescription: "",
+    fullDescription: "",
+  },
+});
 
   const [imageFile, setImageFile] =
     useState<File | null>(null);
@@ -46,35 +53,38 @@ export default function BookForm({
   const [pdfFile, setPdfFile] =
     useState<File | null>(null);
 
-  useEffect(() => {
-    if (mode !== "edit" || !id) return;
+ useEffect(() => {
+  if (mode !== "edit" || !id) return;
 
-    const loadBook = async () => {
-      try {
-        const res = await getBook(id);
+  const loadBook = async () => {
+    try {
+      const res = await getBook(id);
 
-        reset({
-          title: res.book.title,
-          author: res.book.author,
-          category: res.book.category,
-          price: res.book.price,
-          rating: res.book.rating,
-          shortDescription:
-            res.book.shortDescription,
-          fullDescription:
-            res.book.fullDescription,
-        });
-      } catch {
-        toast.error("Book not found.");
-      }
-    };
+      console.log("BOOK RESPONSE:", res);
+      console.log("BOOK DATA:", res.book);
 
-    loadBook();
-  }, [id, mode, reset]);
+      reset({
+        title: res.book.title,
+        author: res.book.author,
+        category: res.book.category,
+        price: res.book.price,
+        rating: res.book.rating,
+        shortDescription: res.book.shortDescription,
+        fullDescription: res.book.fullDescription,
+      });
+
+    } catch {
+      toast.error("Book not found.");
+    }
+  };
+
+  loadBook();
+
+}, [id, mode, reset]);
 
   const onSubmit = async (
     data: BookFormData
-  ) => {
+  ) => {console.log("SUBMIT DATA:", data);
     try {
       const formData =
         new FormData();
@@ -168,7 +178,7 @@ export default function BookForm({
       );
     }
   };
-
+console.log("WATCH:", watch());
  return (
   <section className="min-h-screen bg-[#805725] py-14">
 

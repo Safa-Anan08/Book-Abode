@@ -6,11 +6,11 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import axiosInstance from "@/lib/axios";
-
+import { GoogleLogin } from "@react-oauth/google";
+import { useAuth } from "@/context/AuthContext";
 interface RegisterForm {
   name: string;
   email: string;
-  photo: string;
   password: string;
 }
 
@@ -39,6 +39,9 @@ export default function RegisterPage() {
     }
   };
 
+   const { getCurrentUser } = useAuth();
+  
+
  return (
   <div className="flex min-h-[calc(100vh-64px)] items-center justify-center bg-[#261311] px-4 py-12">
 
@@ -63,7 +66,85 @@ export default function RegisterPage() {
           Join BookAbode and start your reading journey.
         </p>
       </div>
+<div className="mt-4 flex w-full justify-center">
 
+  <div
+    className="
+      flex w-full items-center justify-center
+      rounded-xl
+      border-2 border-[#261311]
+      bg-[#F8E7C9]
+      py-2
+      transition-all
+      duration-300
+      hover:-translate-y-1
+      hover:shadow-xl
+    "
+  >
+
+    <GoogleLogin
+
+      width="300"
+
+      onSuccess={async (response) => {
+
+        try {
+
+          const res =
+            await axiosInstance.post(
+              "/auth/google",
+              {
+                credential:
+                  response.credential,
+              }
+            );
+
+
+          if (res.data.success) {
+
+            await getCurrentUser();
+
+            toast.success(
+              "Google login successful!"
+            );
+
+            router.push("/");
+
+          }
+
+
+        } catch (error: any) {
+
+          toast.error(
+            error.response?.data?.message ||
+            "Google login failed"
+          );
+
+        }
+
+      }}
+
+
+      onError={() => {
+
+        toast.error(
+          "Google login failed"
+        );
+
+      }}
+
+    />
+
+  </div>
+
+</div>
+<div className="my-7 flex items-center gap-4">
+        <div className="h-px flex-1 bg-[#261311]/20" />
+        <span className="text-sm text-[#4D2E22]">
+          OR
+        </span>
+        <div className="h-px flex-1 bg-[#261311]/20" />
+      </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="space-y-5"
@@ -104,15 +185,6 @@ export default function RegisterPage() {
           </p>
         </div>
 
-  
-        <div>
-          <input
-            type="text"
-            placeholder="Profile Photo URL"
-            className="w-full rounded-xl border-2 border-transparent bg-[#F8E7C9] px-4 py-3 text-[#261311] outline-none transition focus:border-[#261311]"
-            {...register("photo")}
-          />
-        </div>
 
    
         <div>
@@ -144,15 +216,9 @@ export default function RegisterPage() {
         </button>
       </form>
 
-      <div className="my-7 flex items-center gap-4">
-        <div className="h-px flex-1 bg-[#261311]/20" />
-        <span className="text-sm text-[#4D2E22]">
-          OR
-        </span>
-        <div className="h-px flex-1 bg-[#261311]/20" />
-      </div>
+     
 
-      <p className="text-center text-[#4D2E22]">
+      <p className=" mt-5 text-center text-[#4D2E22]">
         Already have an account?{" "}
         <Link
           href="/login"

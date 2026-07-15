@@ -11,7 +11,7 @@ export default function BookSubmitButton({
     <button
       type="submit"
       disabled={loading}
-      className="w-full rounded-xl bg-[#261311] py-4 text-lg font-semibold text-white transition hover:bg-indigo-700 disabled:opacity-60"
+      className="w-full rounded-xl bg-[#261311] py-4 text-lg font-semibold text-white transition hover:bg-[#c15b50] disabled:opacity-60"
     >
       {loading
         ? mode === "create"

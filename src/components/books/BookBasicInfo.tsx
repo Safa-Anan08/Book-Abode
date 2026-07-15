@@ -21,13 +21,13 @@ export default function BookBasicInfo({
           Book Title
         </label>
 
-        <input
-          {...register("title", {
-            required: "Title is required",
-          })}
-          placeholder="Atomic Habits"
-          className="w-full rounded-xl border p-3 focus:border-indigo-600 focus:outline-none"
-        />
+ <input
+  {...register("title", {
+    required: "Title is required",
+  })}
+  placeholder="Atomic Habits"
+  className="w-full rounded-xl border p-3 focus:border-indigo-600 focus:outline-none"
+/>
 
         <p className="mt-1 text-sm text-red-500">
           {errors.title?.message}

@@ -5,10 +5,11 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 import toast from "react-hot-toast";
-
+import Image from "next/image";
 import { useAuth } from "@/context/AuthContext";
 import axiosInstance from "@/lib/axios";
-
+import { FaHeart ,FaPlus, FaBook,FaUser} from "react-icons/fa";
+import { IoLogOut } from "react-icons/io5";
 export default function UserDropdown({
   mobile = false,
 }: {
@@ -32,12 +33,13 @@ export default function UserDropdown({
 
   if (mobile) {
     return (
+
       <button
-        onClick={logout}
-        className="py-3 text-left text-red-600"
-      >
-        Logout
-      </button>
+          onClick={logout}
+          className=" flex items-center  gap-3 w-full px-5 py-4 text-left font-semibold text-red-400 transition hover:bg-[#C3955B]/10 hover:text-[#C3955B]"
+        >
+          <IoLogOut /> Logout
+        </button>
     );
   }
 
@@ -50,7 +52,9 @@ export default function UserDropdown({
   >
 
     <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#C3955B] font-bold text-[#261311] shadow-lg">
-      {user?.name?.charAt(0).toUpperCase()}
+   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#C3955B] text-lg font-bold text-[#261311]">
+  {user?.name?.charAt(0).toUpperCase() || "U"}
+</div>
     </div>
 
     <div className="hidden text-left sm:block">
@@ -101,33 +105,45 @@ export default function UserDropdown({
 
       <div className="py-2">
 
-        <Link
+       
+         <Link
           href="/profile"
-          className="block px-5 py-3 text-gray-300 transition hover:bg-[#C3955B]/10 hover:text-[#C3955B]"
+          onClick={() => setOpen(false)}
+           className="flex items-center gap-3 px-5 py-3 text-gray-300 transition hover:bg-[#C3955B]/10 hover:text-[#C3955B]"
+     
         >
-          👤 My Profile
+          <FaUser  className="text-purple-900" />
+        <span>My Profile</span>
         </Link>
-
         <Link
           href="/books/manage"
-          className="block px-5 py-3 text-gray-300 transition hover:bg-[#C3955B]/10 hover:text-[#C3955B]"
+          onClick={() => setOpen(false)}
+           className="flex items-center gap-3 px-5 py-3 text-gray-300 transition hover:bg-[#C3955B]/10 hover:text-[#C3955B]"
+     
         >
-          📚 My Books
+          <FaBook className="text-blue-500" />
+        <span>My Book</span>
         </Link>
 
+        
         <Link
-          href="/books/add"
-          className="block px-5 py-3 text-gray-300 transition hover:bg-[#C3955B]/10 hover:text-[#C3955B]"
-        >
-          ➕ Add Book
-        </Link>
+        href="/books/add"
+        onClick={() => setOpen(false)}
+        className="flex items-center gap-3 px-5 py-3 text-gray-300 transition hover:bg-[#C3955B]/10 hover:text-[#C3955B]"
+     >
+       <FaPlus className="text-purple-500" />
+        <span>Add Book</span>
+     </Link>
 
-        <Link
-          href="/wishlist"
-          className="block px-5 py-3 text-gray-300 transition hover:bg-[#C3955B]/10 hover:text-[#C3955B]"
-        >
-          ❤️ My Wishlist
-        </Link>
+
+       <Link
+        href="/wishlist"
+        onClick={() => setOpen(false)}
+        className="flex items-center gap-3 px-5 py-3 text-gray-300 transition hover:bg-[#C3955B]/10 hover:text-[#C3955B]"
+     >
+       <FaHeart className="text-red-500" />
+        <span>My Wishlist</span>
+     </Link>
 
       </div>
 
@@ -136,9 +152,9 @@ export default function UserDropdown({
 
         <button
           onClick={logout}
-          className="w-full px-5 py-4 text-left font-semibold text-red-400 transition hover:bg-red-600 hover:text-white"
+          className=" flex items-center gap-3 w-full px-5 py-4 text-left font-semibold text-red-400 transition hover:bg-[#C3955B]/10 hover:text-[#C3955B]"
         >
-          🚪 Logout
+          <IoLogOut /> Logout
         </button>
 
       </div>

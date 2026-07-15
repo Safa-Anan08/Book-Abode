@@ -7,6 +7,7 @@ import {
   Users,
   Trophy,
 } from "lucide-react";
+import { FaHeart } from "react-icons/fa";
 
 interface WishlistBook {
   bookId: string;
@@ -142,8 +143,8 @@ export default function WishlistsTable({
                   : "--"}
               </h2>
 
-              <p className="mt-1 text-sm text-gray-100">
-                ❤️{" "}
+              <p className="flex items-center gap-2 mt-1 text-sm text-gray-100">
+                <FaHeart className="text-red-500" />{" "}
                 {topBook
                   ? topBook.wishlistCount
                   : 0}{" "}
@@ -208,8 +209,7 @@ export default function WishlistsTable({
 
       </div>
 
-            <div className="overflow-hidden rounded-2xl border bg-[#e2b883] shadow">
-
+            <div className="hidden overflow-hidden rounded-2xl border bg-[#e2b883] shadow lg:block">
         <div className="overflow-x-auto">
 
           <table className="min-w-full">
@@ -320,7 +320,7 @@ export default function WishlistsTable({
 
                             </h3>
 
-                            <p className="text-sm text-gray-500">
+                            <p className="text-sm text-gray-300">
 
                               ID:
                               {" "}
@@ -348,15 +348,9 @@ export default function WishlistsTable({
 
                       <td className="px-6 py-5">
 
-                        <span
-                          className={`rounded-full px-3 py-1 text-xs font-semibold ${categoryColor(
-                            book.category
-                          )}`}
-                        >
-
-                          {book.category}
-
-                        </span>
+                        <span className="mt-3 inline-flex rounded-full bg-[#C3955B] px-3 py-1 text-xs font-semibold text-[#261311]">
+                      {book.category}
+                       </span>
 
                       </td>
 
@@ -366,7 +360,7 @@ export default function WishlistsTable({
 
                         <span className="inline-flex items-center gap-2 rounded-full bg-red-100 px-3 py-1 text-sm font-semibold text-red-600">
 
-                          ❤️ {book.wishlistCount}
+                          <FaHeart className="text-red-500" /> {book.wishlistCount}
 
                         </span>
 
@@ -418,35 +412,35 @@ export default function WishlistsTable({
           filteredBooks.map((book, index) => (
             <div
               key={book.bookId}
-              className="rounded-2xl border bg-white p-5 shadow transition hover:shadow-lg"
+             className="overflow-hidden rounded-3xl border border-[#C3955B]/20 bg-[#261311] shadow-xl"
             >
-              <div className="flex gap-4">
+             <div className="flex gap-4 border-b border-[#C3955B]/10 bg-[#3A241C] p-4">
 
                 <img
                   src={book.image}
                   alt={book.title}
-                  className="h-28 w-20 rounded-lg object-cover"
+                  className="h-28 w-20 rounded-xl border border-[#C3955B]/20 object-cover"
                 />
 
-                <div className="flex-1">
+                <div className="flex flex-1 flex-col justify-between">
 
                   <div className="flex items-center justify-between">
 
-                    <span className="text-2xl">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#C3955B] text-lg">
                       {getRank(index)}
-                    </span>
+                    </div>
 
-                    <span className="rounded-full bg-red-100 px-3 py-1 text-sm font-semibold text-red-600">
-                      ❤️ {book.wishlistCount}
+                    <span className="inline-flex items-center gap-2 rounded-full bg-red-500/20 px-3 py-1 text-sm font-semibold text-red-400">
+                      <FaHeart className="text-red-500" /> {book.wishlistCount}
                     </span>
 
                   </div>
 
-                  <h3 className="mt-3 text-lg font-bold">
+                  <h3 className="mt-3 text-lg font-bold text-[#C3955B]">
                     {book.title}
                   </h3>
 
-                  <p className="text-sm text-gray-500  bg-[#e2b883]">
+                  <p className="text-sm text-gray-500 ">
                     {book.author}
                   </p>
 
@@ -458,11 +452,11 @@ export default function WishlistsTable({
                     {book.category}
                   </span>
 
-                  <p className="mt-4 text-sm text-gray-500">
+                  <p className="mt-4 text-xs uppercase tracking-wide text-gray-400">
                     Last Wishlisted
                   </p>
 
-                  <p className="font-medium">
+                  <p className="font-semibold text-white">
                     {new Date(
                       book.lastAdded
                     ).toLocaleDateString()}

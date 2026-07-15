@@ -22,11 +22,16 @@ export const createBook = async (data: any) => {
 
 export const updateBook = async (
   id: string,
-  data: any
+  data: FormData
 ) => {
   const res = await axiosInstance.put(
     `/books/${id}`,
-    data
+    data,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
   );
 
   return res.data;

@@ -7,7 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import axiosInstance from "@/lib/axios";
 import { useAuth } from "@/context/AuthContext";
-
+import { GoogleLogin } from "@react-oauth/google";
 interface LoginForm {
   email: string;
   password: string;
@@ -42,10 +42,17 @@ export default function LoginPage() {
     }
   };
 
-  const handleDemoLogin = () => {
-    setValue("email", "demo@bookabode.com");
-    setValue("password", "123456");
-  };
+ const handleDemoLogin = () => {
+  setValue("email", "demo@bookabode.com", {
+    shouldValidate: true,
+    shouldDirty: true,
+  });
+
+  setValue("password", "123456", {
+    shouldValidate: true,
+    shouldDirty: true,
+  });
+};
 
 return (
   <div className="flex min-h-[calc(100vh-64px)] items-center justify-center bg-[#261311] px-4 py-12">
@@ -148,7 +155,85 @@ return (
           Register
         </Link>
       </p>
+<div className="my-7 flex items-center gap-4">
+        <div className="h-px flex-1 bg-[#261311]/20" />
+        <span className="text-sm text-[#4D2E22]">
+          OR
+        </span>
+        <div className="h-px flex-1 bg-[#261311]/20" />
+      </div>
+      <div className="mt-4 flex w-full justify-center">
 
+  <div
+    className="
+      flex w-full items-center justify-center
+      rounded-xl
+      border-2 border-[#261311]
+      bg-[#F8E7C9]
+      py-2
+      transition-all
+      duration-300
+      hover:-translate-y-1
+      hover:shadow-xl
+    "
+  >
+
+    <GoogleLogin
+
+      width="300"
+
+      onSuccess={async (response) => {
+
+        try {
+
+          const res =
+            await axiosInstance.post(
+              "/auth/google",
+              {
+                credential:
+                  response.credential,
+              }
+            );
+
+
+          if (res.data.success) {
+
+            await getCurrentUser();
+
+            toast.success(
+              "Google login successful!"
+            );
+
+            router.push("/");
+
+          }
+
+
+        } catch (error: any) {
+
+          toast.error(
+            error.response?.data?.message ||
+            "Google login failed"
+          );
+
+        }
+
+      }}
+
+
+      onError={() => {
+
+        toast.error(
+          "Google login failed"
+        );
+
+      }}
+
+    />
+
+  </div>
+
+</div>
     </div>
 
   </div>

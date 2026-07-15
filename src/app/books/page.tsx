@@ -196,7 +196,7 @@ export default function BooksPage() {
           <button
             disabled={page === 1}
             onClick={() => setPage((prev) => prev - 1)}
-            className="rounded-xl border border-[#C3955B] px-6 py-3 font-semibold text-[#C3955B] transition hover:bg-[#C3955B] hover:text-[#261311] disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-xl border border-[#C3955B] px-6 py-3 font-semibold text-[#261311]  transition hover:bg-[#e6b87f] hover:text-[#261311] disabled:cursor-not-allowed disabled:opacity-40"
           >
             Previous
           </button>
@@ -208,7 +208,7 @@ export default function BooksPage() {
           <button
             disabled={page === pagination.totalPages}
             onClick={() => setPage((prev) => prev + 1)}
-            className="rounded-xl border border-[#C3955B] px-6 py-3 font-semibold text-[#C3955B] transition hover:bg-[#C3955B] hover:text-[#261311] disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-xl border border-[#C3955B] px-6 py-3 font-semibold text-[#261311]  transition hover:bg-[#C3955B] hover:text-[#261311] disabled:cursor-not-allowed disabled:opacity-40"
           >
             Next
           </button>

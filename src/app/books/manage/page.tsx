@@ -94,7 +94,7 @@ export default function ManageBooksPage() {
 
         <Link
           href="/books/add"
-          className="rounded-xl bg-[#C3955B] px-6 py-3 font-semibold text-[#261311] shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-[#D4A76A]"
+          className="rounded-xl bg-[#eebd82] px-6 py-3 font-semibold text-[#261311] shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-[#D4A76A]"
         >
           + Add New Book
         </Link>
@@ -116,11 +116,10 @@ export default function ManageBooksPage() {
         </div>
 
       ) : (
+           <>
+        <div className="hidden lg:block overflow-hidden rounded-3xl border border-[#C3955B]/20 bg-[#3A241C] shadow-2xl">
 
-        <div className="overflow-hidden rounded-3xl border border-[#C3955B]/20 bg-[#3A241C] shadow-2xl">
-
-          <div className="overflow-x-auto">
-
+      <div className="overflow-x-auto">
             <table className="min-w-full">
 
               <thead className="bg-[#C3955B] text-[#261311]">
@@ -221,8 +220,128 @@ export default function ManageBooksPage() {
           </div>
 
         </div>
+        <div className="space-y-5 lg:hidden">
+  {books.map((book) => (
+    <div
+      key={book._id}
+      className="overflow-hidden rounded-3xl border border-[#C3955B]/20 bg-[#3A241C] shadow-xl"
+    >
+      <div className="bg-gradient-to-r from-[#C3955B]/20 via-transparent to-transparent px-5 py-4">
 
-      )}
+        <div className="flex items-start justify-between gap-3">
+
+          <div>
+
+            <span className="rounded-full bg-[#C3955B]/20 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#C3955B]">
+              {book.category}
+            </span>
+
+            <h2 className="mt-3 text-xl font-bold leading-tight text-white">
+              {book.title}
+            </h2>
+
+            <p className="mt-1 text-sm text-gray-400">
+              by {book.author}
+            </p>
+
+          </div>
+
+          <div className="rounded-2xl bg-[#261311] px-4 py-3 text-center shadow-lg">
+
+            <p className="text-xs text-gray-400">
+              Price
+            </p>
+
+            <h3 className="mt-1 text-xl font-bold text-[#C3955B]">
+              ${book.price}
+            </h3>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div className="space-y-5 p-5">
+
+        <div className="grid grid-cols-2 gap-4">
+
+          <div className="rounded-2xl bg-[#261311]/60 p-4">
+
+            <p className="text-xs uppercase tracking-wide text-gray-400">
+              Author
+            </p>
+
+            <p className="mt-2 font-semibold text-white">
+              {book.author}
+            </p>
+
+          </div>
+
+          <div className="rounded-2xl bg-[#261311]/60 p-4">
+
+            <p className="text-xs uppercase tracking-wide text-gray-400">
+              Rating
+            </p>
+
+            <div className="mt-2 flex items-center gap-2">
+
+              <span className="text-lg">
+                ⭐
+              </span>
+
+              <span className="font-semibold text-white">
+                {book.rating}
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div className="rounded-2xl border border-[#C3955B]/20 bg-[#261311]/40 p-4">
+
+          <div className="flex items-center justify-between">
+
+            <span className="text-sm text-gray-400">
+              Category
+            </span>
+
+            <span className="rounded-full bg-[#C3955B]/20 px-3 py-1 text-sm font-semibold text-[#C3955B]">
+              {book.category}
+            </span>
+
+          </div>
+
+        </div>
+
+        <div className="flex gap-3">
+
+          <Link
+            href={`/books/edit/${book._id}`}
+            className="flex-1 rounded-xl bg-[#C3955B] py-3 text-center font-bold text-[#261311] transition duration-300 hover:scale-[1.02] hover:bg-[#D6A76C]"
+          >
+            Edit Book
+          </Link>
+
+          <button
+            onClick={() => handleDelete(book._id)}
+            className="flex-1 rounded-xl border border-red-500 py-3 font-bold text-red-400 transition duration-300 hover:bg-red-600 hover:text-white"
+          >
+            Delete
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+  ))}
+</div>
+       </>
+
+)}
+      
 
     </div>
   </section>

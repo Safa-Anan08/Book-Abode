@@ -130,13 +130,10 @@ export default function UsersTable({
       </div>
 
     </div>
-
-  
-    <div className="overflow-hidden rounded-3xl border border-[#261311]/10">
-
-      <div className="overflow-x-auto">
-
-        <table className="min-w-[900px] w-full">
+   
+<div className="hidden overflow-x-auto lg:block">
+  <table className="min-w-[900px] w-full">
+     
 
           <thead className="bg-[#261311]">
 
@@ -255,11 +252,109 @@ export default function UsersTable({
 
           </tbody>
 
-        </table>
+        
+  </table>
+</div>
+
+
+<div className="space-y-4 lg:hidden">
+  {filteredUsers.map((user) => (
+    <div
+      key={user._id}
+      className="rounded-2xl bg-[#6a3522] p-5 shadow-lg"
+    >
+      <div className="space-y-3">
+
+        <div>
+          <p className="text-xs uppercase text-gray-400">
+            Name
+          </p>
+          <p className="font-semibold text-white">
+            {user.name}
+          </p>
+        </div>
+
+        <div>
+          <p className="text-xs uppercase text-gray-400">
+            Email
+          </p>
+          <p className="break-all text-gray-300">
+            {user.email}
+          </p>
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-xs uppercase text-gray-400">
+              Role
+            </p>
+
+            <span
+              className={`mt-1 inline-block rounded-full px-3 py-1 text-sm font-semibold ${
+                user.role === "admin"
+                  ? "bg-[#C3955B] text-[#261311]"
+                  : "bg-green-800/30 text-white"
+              }`}
+            >
+              {user.role}
+            </span>
+          </div>
+
+          <div>
+            <p className="text-xs uppercase text-gray-400">
+              Joined
+            </p>
+
+            <p className="text-sm text-gray-300">
+              {new Date(user.createdAt).toLocaleDateString()}
+            </p>
+          </div>
+        </div>
+
+        <div className="flex gap-3 pt-2">
+
+          <button
+            disabled={loadingId === user._id}
+            onClick={() =>
+              handleRole(
+                user._id,
+                user.role === "admin"
+                  ? "user"
+                  : "admin"
+              )
+            }
+            className="flex-1 rounded-xl bg-[#C3955B] py-3 font-semibold text-[#261311]"
+          >
+            <div className="flex items-center justify-center gap-2">
+              <Shield size={18} />
+              Change Role
+            </div>
+          </button>
+
+          <button
+            disabled={loadingId === user._id}
+            onClick={() => handleDelete(user._id)}
+            className="flex-1 rounded-xl bg-red-600 py-3 font-semibold text-white"
+          >
+            <div className="flex items-center justify-center gap-2">
+              <Trash2 size={18} />
+              Delete
+            </div>
+          </button>
+
+        </div>
 
       </div>
-
     </div>
+  ))}
+
+  {filteredUsers.length === 0 && (
+    <div className="rounded-2xl bg-[#3A241C] py-12 text-center text-gray-400">
+      No users found.
+    </div>
+  )}
+</div>
+  
 
   </section>
 );

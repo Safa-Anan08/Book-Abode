@@ -85,6 +85,7 @@ export const getReports =
       await axiosInstance.get(
         "/admin/reports"
       );
+      
 
     return res.data;
   };
@@ -132,4 +133,9 @@ export const deleteReport =
 
     return res.data;
   };
+
+  export const getContacts = async () => {
+  const res = await axiosInstance.get("/admin/contacts");
+  return res.data;
+};
 
