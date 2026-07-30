@@ -6,11 +6,34 @@ BookAbode is a modern full-stack online book marketplace where users can discove
 
 ---
 
+## 🎥 Project Preview
+
+<p align="center">
+  <img src="/images/screenshots/bookabode-gif.gif" alt="BookAbode Demo" width="900"/>
+</p>
+
+---
+
 ## 🌐 Live Website
 
 **Client:** https://book-abode.vercel.app
 
 **Server API:** https://book-abode-server.onrender.com
+
+---
+
+
+# 📸 Screenshots
+
+## 🏠 Home Page
+
+<img src="./screenshots/homepage.png" alt="BookAbode Home Page" width="900"/>
+
+---
+
+## 🛠️ Admin Dashboard
+
+<img src="./screenshots/admin dashboard.png" alt="BookAbode Admin Dashboard" width="900"/>
 
 ---
 
