@@ -9,7 +9,7 @@ BookAbode is a modern full-stack online book marketplace where users can discove
 ## 🎥 Project Preview
 
 <p align="center">
-  <img src="/images/screenshots/bookabode-gif.gif" alt="BookAbode Demo" width="900"/>
+  <img src="./public/images/screenshots/bookabode-gif.gif" alt="BookAbode Demo" width="700"/>
 </p>
 
 ---
@@ -27,13 +27,13 @@ BookAbode is a modern full-stack online book marketplace where users can discove
 
 ## 🏠 Home Page
 
-<img src="./screenshots/homepage.png" alt="BookAbode Home Page" width="900"/>
+<img src="./public/images/screenshots/homepage.png" alt="BookAbode Home Page" width="700"/>
 
 ---
 
 ## 🛠️ Admin Dashboard
 
-<img src="./screenshots/admin dashboard.png" alt="BookAbode Admin Dashboard" width="900"/>
+<img src="./public/images/screenshots/admin-dashboard.png" alt="BookAbode Admin Dashboard" width="700"/>
 
 ---
 
